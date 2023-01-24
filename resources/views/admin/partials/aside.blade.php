@@ -5,6 +5,7 @@
             <li class="mb-2 {{request()->routeIs('admin.projects.index') == 'projects' ? 'active' : ''}}"><a href="{{route('admin.projects.index')}}"><i class="fa-solid fa-diagram-project"></i> Progetti</a></li>
             <li class="mb-2 {{request()->routeIs('admin.project_type') == 'projects' ? 'active' : ''}}"><a href="{{route('admin.project_type')}}"><i class="fa-solid fa-link"></i> Tipi/Progetti</a></li>
             <li class="mb-2 {{request()->routeIs('admin.types.index') == 'projects' ? 'active' : ''}}"><a href="{{route('admin.types.index')}}"><i class="fa-solid fa-tag"></i> Tipi</a></li>
+            <li class="mb-2 {{request()->routeIs('admin.technologies.index') == 'projects' ? 'active' : ''}}"><a href="{{route('admin.technologies.index')}}"><i class="fa-solid fa-tag"></i> Tecnologie</a></li>
         </ul>
     </nav>
 </div>

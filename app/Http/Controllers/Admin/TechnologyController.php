@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use App\Http\Requests\TechnologyRequest;
 
 class TechnologyController extends Controller
 {
@@ -15,7 +16,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Technology::orderBy('id', 'desc')->paginate(10);
+
+        return view('admin.technologies.index', compact('technologies'));
     }
 
     /**
@@ -34,9 +37,15 @@ class TechnologyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TechnologyRequest $request)
     {
-        //
+        $val_data = $request->all();
+
+        $val_data['slug'] = Technology::generateSlug($val_data['name']);
+
+        Technology::create($val_data);
+
+        return redirect()->back()->with('message', "Tecnologia {$val_data['name']} creata correttamente");
     }
 
     /**
@@ -68,9 +77,15 @@ class TechnologyController extends Controller
      * @param  \App\Models\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Technology $technology)
+    public function update(TechnologyRequest $request, Technology $technology)
     {
-        //
+        $val_data = $request->all();
+
+        $val_data['slug'] = Technology::generateSlug($val_data['name']);
+
+        $technology->update($val_data);
+
+        return redirect()->back()->with('message', "Tecnologia {$val_data['name']} aggiornata correttamente");
     }
 
     /**
@@ -81,6 +96,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return redirect()->back()->with('message', "Tecnologia $technology->name eliminata correttamente");
     }
 }
