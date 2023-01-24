@@ -10,6 +10,13 @@
             @if ($project->type)
                 <h4>Tipo: {{$project->type->name}}</h4>
             @endif
+
+            @if($project->technology)
+                @foreach ($project->technology as $technology)
+                <span class="badge text-bg-warning">{{$technology->name}}</span>
+                @endforeach
+            @endif
+
             <div>Nome cliente: <strong>{{$project->client_name}}</strong></div>
             <div>Sommario: {!!$project->summary!!}</div>
             <a class="btn btn-primary text-white" href="{{route('admin.projects.index', $project)}}" title="edit">Torna alla lista</i></a>
