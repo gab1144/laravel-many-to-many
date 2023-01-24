@@ -20,6 +20,7 @@
                 <th scope="col"><a href="{{route('admin.projects.orderby',['id',$direction])}}">ID</a></th>
                 <th scope="col"><a href="{{route('admin.projects.orderby',['name',$direction])}}">Nome progetto</a></th>
                 <th scope="col"><a href="{{route('admin.projects.orderby',['client_name',$direction])}}">Nome cliente</a></th>
+                <th scope="col">Tecnologie</th>
                 <th scope="col">Azioni</th>
               </tr>
             </thead>
@@ -29,6 +30,13 @@
                         <th>{{$project->id}}</th>
                         <td>{{$project->name}}  <span class="badge text-bg-info">{{$project->type?->name}}</span></td>
                         <td>{{$project->client_name}}</td>
+                        <td>
+                            @forelse ($project->technology as $technology)
+                            <span class="badge text-bg-warning">{{$technology->name}}</span>
+                            @empty
+                                - No data -
+                            @endforelse
+                        </td>
                         <td><a href="{{route('admin.projects.show', $project)}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                         <a class="btn btn-warning " href="{{route('admin.projects.edit', $project)}}" title="edit"><i class="fa-solid fa-pencil text-white"></i></a>
                         @include('admin.partials.form-delete', [
