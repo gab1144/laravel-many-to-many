@@ -1,0 +1,96 @@
+@use 'partials/variables' as *;
+@import '~bootstrap/scss/bootstrap';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+//header
+header {
+    background-color: $header-blue;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    height: $header-nav-height;
+    .nav-item {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.logo {
+    height: calc($header-nav-height - 10px);
+}
+//-- /header --
+
+//aside
+.aside {
+    background-color: $aside-blue;
+}
+
+.aside-menu {
+    position: fixed;
+    height: 100%;
+    ul {
+        list-style: none;
+    }
+    a {
+        color: white;
+        font-size: .9rem;
+        text-decoration: none;
+        &:hover{
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
+
+.active {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    a {
+        color: $header-blue
+    }
+}
+//-- /aside --
+
+//main
+.main-wrapper{
+    height: calc(100vh - $header-nav-height);
+}
+
+main {
+    height: calc(100vh - $header-nav-height);
+    overflow: auto;
+}
+
+.social-links {
+    color: black;
+    font-size: 40px;
+}
+
+.add-button {
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.detail-img {
+    width: 100%;
+    max-width: 500px;
+}
+
+thead {
+    a {
+        color: black;
+        text-decoration: none;
+    }
+}
+//-- /main --
+
+//editor
+.ck-editor__editable[role="textbox"] {
+    height: 300px;
+}
+//-- /editor --
