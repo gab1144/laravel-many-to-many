@@ -29,6 +29,25 @@
         </div>
 
         <div class="mb-3">
+            <div>
+                <label for="type_id" class="form-label">Tipo</label>
+            </div>
+            <div>
+                @foreach ($technologies as $technology)
+                    <input type="checkbox"
+                    id="technology{{$loop->iteration}}"
+                    name="technologies[]"
+                    value="{{$technology->id}}"
+                    @if (in_array($technology->id, old('technologies',[])))
+                        checked
+                    @endif
+                    >
+                    <label class="me-2" for="tag{{$loop->iteration}}">{{$technology->name}}</label>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="mb-3">
           <label for="client_name" class="form-label">Nome del cliente</label>
           <input type="text" class="form-control @error('client_name') is-invalid @enderror" name="client_name" id="client_name" value="{{old('client_name')}}">
           @error('client_name')

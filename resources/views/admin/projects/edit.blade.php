@@ -27,7 +27,27 @@
                      value="{{$type->id}}">{{$type->name}}</option>
                 @endforeach
             </select>
+        </div>
 
+        <div class="mb-3">
+            <div>
+                <label for="type_id" class="form-label">Tipo</label>
+            </div>
+            <div>
+                @foreach ($technologies as $technology)
+                    <input type="checkbox"
+                    id="technology{{$loop->iteration}}"
+                    name="technologies[]"
+                    value="{{$technology->id}}"
+
+                    @if ((!$errors->all() && $project->technology->contains($technology)) || ($errors->all() && in_array($technology->id, old('technologies',[]))))
+                        checked
+                    @endif
+
+                    >
+                    <label class="me-2" for="tag{{$loop->iteration}}">{{$technology->name}}</label>
+                @endforeach
+            </div>
         </div>
 
         <div class="mb-3">
