@@ -123,7 +123,7 @@ class ProjectController extends Controller
     {
         $form_data = $request->all();
 
-        if($form_data['name'] != $project->title){
+        if($form_data['name'] != $project->name){
             $form_data['slug'] = Project::generateSlug($form_data['name']);
         }else{
             $form_data['slug'] = $project->slug;
@@ -131,8 +131,8 @@ class ProjectController extends Controller
 
         if(array_key_exists('cover_image',$form_data)){
 
-            if($project->image){
-                Storage::dispostk('public')->delete($project->image);
+            if($project->cover_image){
+                Storage::disk('public')->delete($project->cover_image);
             }
             $form_data['cover_image_original_name'] = $request->file('cover_image')->getClientOriginalName();
             $form_data['cover_image'] = Storage::put('uploads', $form_data['cover_image']);
@@ -157,6 +157,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        Storage::disk('public')->delete($project->cover_image);
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('deleted', "Il progetto $project->name è stato eliminato correttamente");
